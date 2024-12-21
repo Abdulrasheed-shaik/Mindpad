@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900">
+        <div class="form p-10 text-white">
+            <h1 class="text-center mb-10 text-6xl text-sky-600">MindPad</h1>
+            <form action="/create" method="post">
+                <input class="block w-full rounded-md px-5 py-2 outline-none bg-zinc-800" type="text" placeholder="Title" name="title">
+                <textarea class="block w-full rounded-md mt-2 px-5 outline-none py-2 resize-none bg-zinc-800" name="details" id="" placeholder="write yout task details"></textarea>
+                <input class="mt-2 bg-blue-600 px-5 py-2" type="submit" value="Create Task">
+            </form>
+        </div>
+        <div class="tasks flex gap-3 flex-wrap p-10 ">
+            <% if(files.length > 0) { %>
+                <% files.forEach(function(val) { %>
+                    <div class="task min-w-72 px-3 py-4 rounded-md bg-zinc-800">
+                        <h1 class="text-white text-2xl tracking-tighter"><%= val %></h1>
+                        <div class="flex w-full justify-between items-center">
+                            <a class="text-blue-500 inline-block" href="/file/<%= val %>">Read more..</a>
+                            <a class="text-zinc-400" href="/edit/<%= val %>">edit filename</a>
+                            <form action="/file/<%= val %>?_method=DELETE" method="post">
+                                <input type="submit" value="Remove" class="text-red-600">
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h3 class="text-zinc-600">No task yet</h3>
+            <% } %>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
